@@ -1,0 +1,25 @@
+/target
+
+# Environment and secrets
+settings.toml
+settings-node*.toml
+
+# AI agent files
+CLAUDE.md
+/.claude/
+/.serena/
+
+# Cluster runtime data
+/cluster/logs/
+/cluster/pids/
+/cluster/node-*/
+
+# Data directory
+/data/
+
+# IDE
+/.idea/
+*.iml
+
+# Logs
+*.log

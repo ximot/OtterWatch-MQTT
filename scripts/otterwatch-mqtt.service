@@ -1,0 +1,44 @@
+[Unit]
+Description=OtterWatch MQTT Broker
+Documentation=https://github.com/yourusername/otterwatch-mqtt
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=otterwatch
+Group=otterwatch
+
+# Main executable
+ExecStart=/usr/local/bin/otterwatch-mqtt -c /etc/otterwatch-mqtt/settings.toml
+
+# Restart on failure
+Restart=always
+RestartSec=5
+
+# Environment
+Environment=RUST_LOG=info
+
+# Working directory
+WorkingDirectory=/var/lib/otterwatch-mqtt
+
+# Resource limits
+LimitNOFILE=65535
+LimitNPROC=4096
+
+# Security hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+ReadWritePaths=/var/lib/otterwatch-mqtt /var/log/otterwatch-mqtt
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=otterwatch-mqtt
+
+[Install]
+WantedBy=multi-user.target

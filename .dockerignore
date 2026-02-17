@@ -1,0 +1,11 @@
+target/
+.git/
+.gitignore
+*.log
+data/
+settings.toml
+settings-*.toml
+*.md
+cluster/
+scripts/
+dashboard/

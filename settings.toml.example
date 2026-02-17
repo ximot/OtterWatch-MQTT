@@ -1,0 +1,62 @@
+# OtterWatch MQTT Broker Configuration
+# Copy this file to settings.toml and adjust values as needed
+# All settings can be overridden via environment variables with OTTERWATCH_MQTT_ prefix
+# e.g., OTTERWATCH_MQTT_MQTT__LISTEN_ADDR=0.0.0.0:1883
+
+[node]
+# Unique node name (defaults to hostname)
+name = "otterwatch-mqtt-1"
+# Directory for persistent data
+data_dir = "./data"
+
+[mqtt]
+# MQTT listen address
+listen_addr = "0.0.0.0:1883"
+# Maximum concurrent connections
+max_connections = 10000
+# Router buffer size for message queuing
+router_buffer_size = 50000
+# Client keepalive timeout in seconds
+keepalive_secs = 30
+# Maximum packet size (256KB)
+max_packet_size = 262144
+# Maximum QoS level (0, 1, or 2)
+max_qos = 1
+
+[auth]
+# Valid API keys (same keys as otterwatch-server)
+api_keys = ["your-secret-api-key-here"]
+# Whether authentication is required
+require_auth = true
+# Where to find API key: "password" or "username"
+api_key_source = "password"
+
+[cluster]
+# Enable cluster mode for HA
+enabled = false
+# Bind address for cluster communication
+bind_addr = "0.0.0.0:7000"
+# Groups assigned to this node (empty = accept all)
+assigned_groups = []
+
+[cluster.discovery]
+# Static peer addresses
+static_peers = []
+# DNS name for SRV record discovery (optional)
+# dns_name = "_mqtt._tcp.otterwatch.local"
+# etcd endpoints (requires cluster-etcd feature)
+etcd_endpoints = []
+
+[metrics]
+# Enable Prometheus metrics
+enabled = true
+# Metrics endpoint listen address
+listen_addr = "0.0.0.0:9090"
+
+[api]
+# Management API listen address
+listen_addr = "0.0.0.0:8085"
+# Enable web dashboard
+dashboard_enabled = true
+# CORS allowed origins
+cors_origins = ["*"]

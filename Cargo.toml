@@ -1,0 +1,67 @@
+[package]
+name = "otterwatch-mqtt"
+version = "0.1.0"
+authors = ["Tomasz Wyderka <twyderka@me.com>"]
+description = "Custom MQTT broker optimized for OtterWatch monitoring system"
+repository = "https://github.com/ximot/otterwatch-mqtt"
+readme = "README.md"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+# MQTT Broker
+rumqttd = "0.20"
+
+# Async runtime
+tokio = { version = "1.39", features = ["full"] }
+
+# Web framework for API
+axum = { version = "0.7", features = ["macros"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace", "fs"] }
+
+# Metrics
+prometheus = "0.13"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Configuration
+config = { version = "0.15", default-features = false, features = ["toml"] }
+
+# Protocol Buffers (for OtterWatch message parsing)
+prost = "0.13"
+prost-types = "0.13"
+
+# Concurrent collections
+dashmap = "6.1"
+
+# Crypto for API key hashing
+sha2 = "0.10"
+hex = "0.4"
+base64 = "0.22"
+
+# Utilities
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+bytes = "1.0"
+thiserror = "1.0"
+anyhow = "1.0"
+hostname = "0.4"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[build-dependencies]
+prost-build = "0.13"
+
+[features]
+default = []
+cluster-etcd = ["dep:etcd-client"]
+
+[dependencies.etcd-client]
+version = "0.14"
+optional = true
